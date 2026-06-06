@@ -1,0 +1,3 @@
+username,password_hash,assigned_lga,role
+jalingo_admin,11c1020419ccf70e3b36ae99ca7ef214aa3490f0e61559219bdfdfb24832ae5a,Jalingo,LGA_Admin
+HR,4e0a4d5c704fc3d29cabb516241cde9ad5427c10461c5dc312f605b181411851,Ardo Kola,LGA_Admin

@@ -1,0 +1,6 @@
+staff_id,full_name,department,position,phone,email,has_photo,has_doc,lga
+STF-101,Mohammed Abubakar,Administration,Director,8012345678,mohammed@example.com,Attached,Attached,
+089,mohammed kabir,Operations & Logistics,ro,9134568796,mohammedkabir44@gmail.com,Attached Successfully,Attached Successfully,
+0908,Abubakar Mohammed,Human Resources (HR),HR,8142969979,Mohammedkabir44@gmail.com,Attached Successfully,Attached Successfully,
+Mohammed,Abubakar Mohammed,Human Resources (HR),HR,8142969979,Mohammedkabir44@gmail.com,saved_passports\Mohammed.png,Attached Successfully,
+09,afu adamu,Operations & Logistics,05,0907667556,Mohammedkabir44@gmail.com,saved_passports\09.png,No Upload,Ardo Kola
