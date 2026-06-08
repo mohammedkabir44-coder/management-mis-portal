@@ -378,3 +378,79 @@ else:
                     
         st.markdown("### 🗄️ Active LGA Admin Account Ledgers")
         st.dataframe(pd.DataFrame(st.session_state.admins_db)[["username", "assigned_lga", "role"]], use_container_width=True)
+
+# ====================================================================
+# ALGAFAZ BEST INVESTMENT LTD - INTEGRATED BIOMETRIC MODULE
+# ====================================================================
+import random
+import time
+from datetime import datetime
+
+def integrated_biometric_panel():
+    st.markdown("---")
+    
+    # Safely pull the selected LGA from your main dashboard's state, default to 'Central Registry' if not set
+    active_lga = st.session_state.get("selected_lga", st.session_state.get("lga", "Central Registry"))
+    
+    # Dynamic header customized for each specific Local Government Area
+    st.subheader(f"🧬 {active_lga} LGA Biometric Central Registry")
+    st.write(f"Securing local administration records via decentralized fingerprint validation pipelines across Taraba State.")
+    
+    tab1, tab2 = st.tabs(["📋 Staff Registration Enrollment", "⏱️ Daily Attendance Gate"])
+    
+    if "bio_scanned" not in st.session_state:
+        st.session_state.bio_scanned = False
+    if "bio_hash" not in st.session_state:
+        st.session_state.bio_hash = ""
+    if "attendance_log" not in st.session_state:
+        st.session_state.attendance_log = []
+
+    with tab1:
+        st.markdown(f"#### Initialize {active_lga} Worker Profile")
+        with st.container(border=True):
+            col1, col2 = st.columns([1, 4])
+            with col1:
+                if st.session_state.bio_scanned:
+                    st.markdown("<h2 style='text-align: center; color: #2ecc71;'>🟢</h2>", unsafe_allow_html=True)
+                else:
+                    st.markdown("<h2 style='text-align: center; color: #95a5a6;'>⚪</h2>", unsafe_allow_html=True)
+            with col2:
+                if st.session_state.bio_scanned:
+                    st.success(f"**Status:** Biometric Template Generated and Tied to {active_lga} Database Registry!")
+                    st.code(f"Stored Hash: {st.session_state.bio_hash}", language="text")
+                else:
+                    st.info("**Status:** Awaiting physical scan from local USB enrollment unit...")
+
+            if st.button("🔴 Trigger Enrollment Scan (Simulation)", use_container_width=True, key="main_reg_scan"):
+                with st.spinner("Extracting localized ridge characteristics..."):
+                    time.sleep(2.0)
+                fake_hash = "".join(random.choices("0123456789ABCDEF", k=32))
+                st.session_state.bio_hash = f"FP_TMP_{fake_hash}"
+                st.session_state.bio_scanned = True
+                st.toast("Fingerprint template captured!", icon="✨")
+                st.rerun()
+
+    with tab2:
+        st.markdown(f"#### {active_lga} Duty Verification Portal")
+        with st.container(border=True):
+            if st.button("🔍 Scan Finger to Clock-In/Out", type="primary", use_container_width=True, key="main_gate_scan"):
+                if not st.session_state.bio_scanned:
+                    st.error("❌ Access Denied: No biometric profile matching this print found in local memory.")
+                else:
+                    with st.spinner("Matching token strings across registry database..."):
+                        time.sleep(1.5)
+                    current_time = datetime.now().strftime("%I:%M:%S %p")
+                    st.session_state.attendance_log.insert(0, {
+                        "Time": current_time,
+                        "LGA Registry": active_lga,
+                        "System Log": "Biometric Match Verified 🟢",
+                        "Security Token": st.session_state.bio_scanned and st.session_state.bio_hash[:15] + "..."
+                    })
+                    st.balloons()
+                    st.success(f"🔓 Access Granted! Duty verification logged for {active_lga} at {current_time}.")
+
+        if st.session_state.attendance_log:
+            st.write(f"**Recent Live Actions ({active_lga}):**")
+            st.table(st.session_state.attendance_log)
+# ====================================================================
+integrated_biometric_panel()
