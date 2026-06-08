@@ -1,2 +1,4 @@
-opencv-python-headless
+streamlit
+pandas
+numpy
 opencv-python-headless
